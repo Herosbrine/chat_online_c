@@ -5,6 +5,8 @@
 ** my_socket.c
 */
 
+#include <sys/types.h>
+#include <sys/socket.h>
 #include "chat_online.h"
 #include "my.h"
 
