@@ -7,7 +7,8 @@
 
 SRC_DIR = ./src/
 
-SRC =	 main.c			\
+SRC =	main.c					\
+		$(SRC_DIR)my_socket.c 	\
 
 NAME = chat_online
 
