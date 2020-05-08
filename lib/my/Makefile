@@ -5,21 +5,21 @@
 ## Makefile
 ##
 
-SRC =	$(SRC_DIR)my_putchar.c 	\
-		$(SRC_DIR)my_putstr.c 	\
-		$(SRC_DIR)my_put_nbr.c 	\
-		$(SRC_DIR)my_revstr.c 	\
-		$(SRC_DIR)my_strlen.c 	\
-		$(SRC_DIR)my_printf.c 	\
-		$(SRC_DIR)flag.c		\
-		$(SRC_DIR)my_getnbr.c 	\
-		$(SRC_DIR)my_put_hexa_max.c \
-		$(SRC_DIR)my_put_octal.c \
-		$(SRC_DIR)my_put_nbr2.c  \
-		$(SRC_DIR)my_put_space.c \
-		$(SRC_DIR)my_printf2.c	 \
-		$(SRC_DIR)my_put_hexa_min.c \
-		$(SRC_DIR)my_put_binary.c
+SRC =	my_putchar.c 	\
+		my_putstr.c 	\
+		my_put_nbr.c 	\
+		my_revstr.c 	\
+		my_strlen.c 	\
+		my_printf.c 	\
+		flag.c		\
+		my_getnbr.c 	\
+		my_put_hexa_max.c \
+		my_put_octal.c \
+		my_put_nbr2.c  \
+		my_put_space.c \
+		my_printf2.c	 \
+		my_put_hexa_min.c \
+		my_put_binary.c
 
 
 OBJ	=	$(SRC:.c=.o)

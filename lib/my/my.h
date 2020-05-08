@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2019
+** Grégoire et ounis, PROJECT, 2019
 ** undefined
 ** File description:
 ** my.h
@@ -7,7 +7,9 @@
 
 #ifndef MY_H_
 #define MY_H_
+
 #include <stdarg.h>
+#include <unistd.h>
 
 typedef struct s_data t_data;
 struct s_data {
