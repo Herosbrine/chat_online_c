@@ -76,10 +76,10 @@ int server_app(void)
                             remove_client(clients, i, &actual);
                             strncpy(buffer, client.name, BUFF_SIZE - 1);
                             strncat(buffer, "disconnected ! ", BUFF_SIZE - strlen(buffer) - 1);
-                            send_message_to_all_clients(clients, &client, actual, buffer, 1);
+                            send_message_to_all_clients(clients, client, actual, buffer, 1);
                         }
                         else
-                            send_message_to_all_clients(clients, &client, actual, buffer, 0);
+                            send_message_to_all_clients(clients, client, actual, buffer, 0);
                         break;
                     }
                 }
