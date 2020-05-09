@@ -17,9 +17,9 @@ int main(int ac, char **argv)
     }
 //<----pour la platforme WIN32---->
     verify();
+    my_printf("<--------------PROJECT REALISER PAR OUNIS ET GREGOIRE-------------->\n");
     if (client_app(argv[1], argv[2]) == 84)
         return (84);
     verify_end();
-    my_printf("<--------------PROJECT REALISER PAR OUNIS ET GREGOIRE-------------->\n");
     return (0);
 }
