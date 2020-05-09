@@ -7,34 +7,32 @@
 
 SRC_DIR = ./client/
 
-SRC =	main.c					\
-		$(SRC_DIR)my_client.c 	\
-		server/server.c			\
+SRC =	server.c		\
 
-NAME = chat_online
+NAME = server
 
-LIB = -lmy -L./lib/my
+LIB = -lmy -L../lib/my
 
-INCLUDE = -I./include
+INCLUDE = -I../include
 
 CFLAGS = -W -Wall -Wextra
 
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
-	make -C ./lib/my
+	make -C ../lib/my
 	gcc $(INCLUDE) -o $(NAME) $(SRC) $(LIB)
 
 debug:
-	make -C ./lib/my
+	make -C ../lib/my
 	gcc $(INCLUDE) -g3 -o $(NAME) $(SRC) $(LIB) $(CFLAGS)
 
 clean:
-	make clean -C ./lib/my/
+	make clean -C ../lib/my/
 	rm -f $(OBJ)
 
 fclean:	clean
-	make fclean -C ./lib/my/
+	make fclean -C ../lib/my/
 	rm -f $(NAME)
 
 re:	fclean all

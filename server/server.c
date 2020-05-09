@@ -9,6 +9,11 @@
 #include "client.h"
 #include "my.h"
 
+void end_connection(int sock)
+{
+    close(sock);
+}
+
 static void verify(void)
 {
     #ifdef  WIN32
@@ -185,5 +190,13 @@ int server_app(void)
     }
     clear_clients(clients, actual);
     end_connection(sock);
+    return (0);
+}
+
+int main(void)
+{
+    verify();
+    server_app();
+    verify_end();
     return (0);
 }

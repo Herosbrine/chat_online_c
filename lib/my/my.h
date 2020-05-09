@@ -85,7 +85,6 @@ int my_put_binary(unsigned int nbr);
 void info_file(char *filepath);
 
 //PROG_CHAT
-int main(int ac, char **argv);
 int write_server(int *sock, char *pseudo);
 int client_app(char *adresse_ip, char *pseudo);
 void end_connection(int sock);
