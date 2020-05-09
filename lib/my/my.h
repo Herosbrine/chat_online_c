@@ -88,5 +88,14 @@ void info_file(char *filepath);
 int write_server(int *sock, char *pseudo);
 int client_app(char *adresse_ip, char *pseudo);
 void end_connection(int sock);
+int read_server(int sock, char *buffer);
+int write_server(int *sock, char *pseudo);
+int init_connection(char *adresse_ip);
+void verify(void);
+void verify_end(void);
+int init_connection2(void);
+void write_client(int sock, char *buffer);
+int read_client(int sock, char *buffer);
+int server_app(void);
 
 #endif

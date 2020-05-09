@@ -9,60 +9,8 @@
 #include "client.h"
 #include "my.h"
 
-void end_connection(int sock)
-{
-    close(sock);
-}
-
-int read_server(int sock, char *buffer)
-{
-    int n = 0;
-
-    if ((n = recv(sock, buffer, BUFF_SIZE - 1, 0)) < 0) {
-        perror("recv()");
-        exit (84);
-    }
-    buffer[n] = '\0';
-    return (n);
-}
-
-int write_server(int *sock, char *pseudo)
-{
-    if (send(*sock, pseudo, my_strlen(pseudo), 0) < 0) {
-        perror("send()");
-        return (84);
-    }
-    return (0);
-}
-
-int init_connection(char *adresse_ip)
-{
-    int sock = socket(AF_INET, SOCK_STREAM, 0);
-    SOCKADDR_IN sin = { 0 };
-    struct hostent *hostinfo;
-    if (sock == INVALID_SOCKET) {
-        perror("socket()");
-        exit (84);
-    }
-    hostinfo = gethostbyname(adresse_ip);
-    if (hostinfo == NULL) {
-        my_printf("Unknow host %s.\n", adresse_ip);
-        exit (84);
-    }
-    sin.sin_addr = *(IN_ADDR *) hostinfo->h_addr;
-    //<------convert unsigned int en host byte order
-    sin.sin_port = htons(PORT);
-    sin.sin_family = AF_INET;
-    if (connect(sock, (SOCKADDR *) &sin, sizeof(SOCKADDR)) == SOCKET_ERROR) {
-        perror("connect()");
-        exit (84);
-    }
-    return (sock);
-}
-
 int client_app(char *adresse_ip, char *pseudo)
 {
-
 //<-------creation du socket--------->
     int sock = init_connection(adresse_ip);
     char *buffer = NULL;

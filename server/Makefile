@@ -7,7 +7,17 @@
 
 SRC_DIR = ./client/
 
-SRC =	server.c		\
+SRC =	server.c			\
+		clear_client.c 		\
+		remove_client.c 	\
+		end_connection.c 	\
+		read_client.c 		\
+		write_client.c 		\
+		init_connection2.c 	\
+		verify_windows32.c 	\
+		send_message.c		\
+		main.c 				\
+
 
 NAME = server
 

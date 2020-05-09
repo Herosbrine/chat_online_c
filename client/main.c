@@ -9,25 +9,6 @@
 #include "client.h"
 #include "my.h"
 
-static void verify(void)
-{
-    #ifdef  WIN32
-    WSADATA wsa;
-    int err = WSAStartup(MAKEWORD(2, 2), &wsa);
-    if (err < 0) {
-        my_printf("WSAStartup failed !");
-        exit (84);
-    }
-    #endif
-}
-
-static void verify_end(void)
-{
-    #ifdef WIN32
-    WSACleanup();
-    #endif
-}
-
 int main(int ac, char **argv)
 {
     if (ac < 3 || ac > 3) {

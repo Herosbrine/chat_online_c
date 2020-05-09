@@ -9,6 +9,11 @@ SRC_DIR = ./client/
 
 SRC =	main.c					\
 		my_client.c 			\
+		end_connection.c 		\
+		read_server.c 			\
+		write_server.c 			\
+		init_connection.c		\
+		verify32win.c			\
 
 NAME = client
 

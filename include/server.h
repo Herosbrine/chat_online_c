@@ -17,4 +17,9 @@ struct my_socket {
     char name[BUFF_SIZE];
     int protocol;
 };
+
+void send_message_to_all_clients(client_t *clients, client_t *sender,
+int actual, const char *buffer, char from_server);
+void clear_clients(client_t *clients, int actual);
+void remove_client(client_t *clients, int to_remove, int *actual);
 #endif

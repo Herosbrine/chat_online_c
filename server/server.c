@@ -9,109 +9,6 @@
 #include "client.h"
 #include "my.h"
 
-void end_connection(int sock)
-{
-    close(sock);
-}
-
-static void verify(void)
-{
-    #ifdef  WIN32
-    WSADATA wsa;
-    int err = WSAStartup(MAKEWORD(2, 2), &wsa);
-    if (err < 0) {
-        my_printf("WSAStartup failed !");
-        exit (84);
-    }
-    #endif
-}
-
-static void verify_end(void)
-{
-    #ifdef WIN32
-    WSACleanup();
-    #endif
-}
-
-
-int init_connection2(void)
-{
-    int sock = socket(AF_INET, SOCK_STREAM, 0);
-    SOCKADDR_IN sin = { 0 };
-    if (sock == INVALID_SOCKET) {
-        perror("socket()");
-        exit (84);
-    }
-    sin.sin_addr.s_addr = htonl(INADDR_ANY);
-    //<------convert unsigned int en host byte order
-    sin.sin_port = htons(PORT);
-    sin.sin_family = AF_INET;
-    if (bind(sock, (SOCKADDR *) &sin, sizeof sin) == SOCKET_ERROR) {
-        perror("bind()");
-        exit (84);
-    }
-    //<----max file d'attente de client---->
-    if (listen(sock, MAX_CLIENTS) == SOCKET_ERROR) {
-        perror("listen()");
-        exit (84);
-    }
-    return (sock);
-}
-
-void clear_clients(client_t *clients, int actual)
-{
-    int i = 0;
-
-    for (; i < actual; i++)
-        close(clients[i].sock);
-}
-//<-------enlever clients specifique------->
-void remove_client(client_t *clients, int to_remove, int *actual)
-{
-    memmove(clients + to_remove, clients + to_remove + 1, (*actual - to_remove - 1) * sizeof(BUFF_SIZE));
-    (*actual)--;
-}
-
-int read_client(int sock, char *buffer)
-{
-    int n = 0;
-
-    if ((n = recv(sock, buffer, BUFF_SIZE - 1, 0)) < 0) {
-        perror("recv()");
-        //<---- si recv error alors on deconnect le client---->
-        n = 0;
-    }
-    buffer[n] = '\0';
-    return (n);
-}
-
-void write_client(int sock, char *buffer)
-{
-    if (send(sock, buffer, strlen(buffer), 0) < 0) {
-        perror("send()");
-        exit (84);
-    }
-}
-
-void send_message_to_all_clients(client_t *clients, client_t *sender, int actual, const char *buffer, char from_server)
-{
-    int i = 0;
-    char *message = NULL;
-    message = malloc(sizeof(char) * BUFF_SIZE);
-    message[0] = 0;
-    for (; i < actual; i++) {
-        //<----ON associe le message a son client----->
-        if (sender->sock != clients[i].sock) {
-            if (from_server == 0) {
-                strncpy(message, sender->name, BUFF_SIZE - 1);
-                strncat(message, " : ", sizeof message - strlen(message) - 1);
-            }
-            strncat(message, buffer, sizeof message - strlen(message) - 1);
-            write_client(clients[i].sock, message);
-        }
-    }
-}
-
 int server_app(void)
 {
     int sock = init_connection2();
@@ -190,13 +87,5 @@ int server_app(void)
     }
     clear_clients(clients, actual);
     end_connection(sock);
-    return (0);
-}
-
-int main(void)
-{
-    verify();
-    server_app();
-    verify_end();
     return (0);
 }
