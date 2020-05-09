@@ -1,14 +1,15 @@
 ##
-## EPITECH PROJECT, 2019
+## GREGOIRE, OUNIS PROJECT, 2019
 ## Makefile
 ## File description:
 ## Makefile
 ##
 
-SRC_DIR = ./src/
+SRC_DIR = ./client/
 
 SRC =	main.c					\
-		$(SRC_DIR)my_socket.c 	\
+		$(SRC_DIR)my_client.c 	\
+		server/server.c			\
 
 NAME = chat_online
 
